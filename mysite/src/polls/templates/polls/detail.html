@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}polls detail{% endblock %}
+{% block content %}
+
+<br>
+<h1>{{question.question_text}}</h1>
+<hr>
+<br>
+{% if error_message %}
+	<p><strong>{{error_message}}</strong></p>
+{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+
+<!-- '{% csrf_token %}'를 항상 첫 줄에 적어줘야 한다. -->
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+	<input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}"/>
+	&ensp;
+	<img src="{{ choice.image.url }}" style="width:25%">
+	<b>
+		<label for="choice{{forloop.counter}}">&ensp;- {{choice.choice_text}}</label>
+	<b>
+	<br/>
+	<br/>
+{% endfor %}
+<br/>
+<input class="mx-1 btn btn-dark" type="submit" value="vote"/>
+</form>
+<br/>
+<br/>
+<br/>
+{% endblock %}

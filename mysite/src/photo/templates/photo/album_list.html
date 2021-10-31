@@ -1,0 +1,38 @@
+	{% extends "base.html" %}
+
+{% block title %}album_list{% endblock %}
+
+{% block extra-style %}
+{% endblock %}
+
+{% block content %}
+<br>
+	<h1>Friends in Big Cat Rescue</h1>
+	<hr>
+		
+	{% for item in object_list %}
+	
+	<div class="mt-5">
+		<a class="h3" href="{% url 'photo:album_detail' item.id %}" style="text-decoration:none; color:black;">
+		{{ item.name }}</a>&emsp;
+		<span class="font-italic h5">{{ item.description }}</span>
+	</div>
+	<hr style="margin: 0 0 20px 0;">
+	
+	<div class="row">
+		{% for photo in item.photo_set.all|slice:":5" %}
+		<div class="ml-5">
+			<div class="thumbnail">
+				<a href="{{ photo.get_absolute_url }}">
+					<img src="{{ photo.image.thumb_url }}" style="width: 100%;">
+				</a>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	
+	{% endfor %}
+<br>	
+<br>
+<br>
+{% endblock %}

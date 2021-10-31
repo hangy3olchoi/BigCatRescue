@@ -1,0 +1,29 @@
+{% extends 'base.html'%}
+{% block title %}Post Archives for Date{% endblock %}
+{% block content %}
+	<br>
+	<h1>Post Archives for {{ day|date:"N d, Y" }}</h1>
+	<hr>
+		
+	<b>
+		&ensp;Post Modify Date&emsp;&emsp;&emsp;Post Title
+	</b>	
+			
+	<div>
+		<ul>
+			{% for post in object_list %}
+			<li>{{ post.modify_dt|date:"Y-m-d" }}
+				&emsp;&emsp;&ensp;
+				<a href = "{{ post.get_absolute_url }}" style="text-decoration:none; color:black;">
+					{{ post.title }}
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+
+	<br>
+	<br>
+	<hr>	
+	<br>
+{% endblock %}

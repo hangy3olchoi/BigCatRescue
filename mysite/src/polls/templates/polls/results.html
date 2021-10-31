@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}polls results{% endblock %}
+{% block content %}
+
+<!--  []는 화면에 나타내고자 표시한 것임. -->
+<br>
+<h1>Poll Result.</h1>
+<h5>&emsp;- {{question.question_text}}</h5>
+<hr>
+<ul>
+	{% for item in reOrdering_list %}
+			<!-- vote {{choice.votes|pluralize}} -> 값이 단수일때는 vote 복수일 때는 votes로 출력. -->
+		<b>
+		<img src="{{ item.image.url }}" style="width:25%">
+		Ranking {{ forloop.counter }} - {{ item.choice_text }},
+		total {{ item.votes }} vote{{ item.votes|pluralize }}
+		</b>
+		<br>
+		<br>
+	{% endfor %}
+</ul>
+
+<br>
+&emsp; &emsp;
+<b>
+	<a href="{% url 'polls:detail' question.id %}" style="text-decoration:none; color:black; font-size:40px;">
+		Vote Again?
+	</a>
+</b>
+
+<br>
+<hr>
+<br>
+<br>
+<br>
+{% endblock %}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Big Cat Rescue</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+	{% extends 'base.html' %}
+	
+	{% block extra-style %}
+	<style type="text/css">
+	.home-image {
+	    background-position: center;
+	    background-size: 100%;
+	    height: 500px;
+	}
+	.title {
+	    color: #c80;
+	    font-weight: bold;
+	}
+	.powered {
+	    position: relative;
+	    top: 77%;
+	    color: #cc0;
+	    font-style: italic;
+	}
+	</style>
+	{% endblock %}
+	
+	{% block content %}
+	    <div class="home-image">
+	    <!-- 기존 이미지 대신에 유튜브 영상 넣고 자동으로 재생 및 음소거 되게함.(유튜브 영상의 src 값 뒤에 "?autoplay=1&mute=1"를 붙이는게 핵심.) -->
+		    <iframe 
+		    	width="100%" 
+		    	height="500" 
+		    	src="https://www.youtube.com/embed/87aJgGqYsSk?autoplay=1&mute=1" 
+		    	title="YouTube video player" 
+		    	frameborder="0" 
+		    	allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+		    	allowfullscreen
+		    ></iframe>
+	    </div>
+	    
+	    <hr style="margin: 10px 0;">
+	
+	    <div>
+	    	<!-- "<div class="col-sm-6">"의 클래스를 "col-sm-3"으로 수정하면 됨. -->
+	        <div>
+	            <h1>Who is Big Cat Rescue?</h1>
+	            <p>Big Cat Rescue is one of the largest accredited sanctuaries
+	            in the world dedicated to abused and abandoned big cats.</p>
+	            
+	            <p></p>
+	            
+	            <p>We are home to about 50+ lions, tigers, bobcats, cougars
+	            and other species most of whom have been abandoned, abused,
+	            orphaned, saved from being turned into fur coats, or retired from performing acts.</p>
+	              
+	            <p>What sets Big Cat Rescue apart is that we are working to end
+	            the abuse at its root by ending the private possession and trade
+	            in exotic cats through legislation and education.</p>
+	             
+	            <p>The sanctuary began rescuing exotic cats in Nov. 4, 1992.</p>
+	        </div>
+	        <br>
+	        
+	        <div>
+	            <h3>Mission Statement</h3>
+	            <p>Big Cat Rescue’s mission is to provide the best home we can for the cats in our care,
+	            end abuse of big cats in captivity and prevent extinction of big cats in the wild.</p>
+	        </div>
+	        <br>
+	        
+	        <div>
+	        	<h3>Big Cat Rescue has many species of cats,<br> many of whom are threatened, endangered or extinct now in the wild, including:</h3>
+	        	<p>Tigers, Lions, Leopards, Cougars, Bobcats, Lynx, Servals, Ocelots and Caracals</p>
+	        </div>
+	        <br>
+
+	        <div>
+	        	<h3>The cats at Big Cat Rescue are here for a variety of reasons, including:</h3>
+	        	<p>Abandoned by owners who wrongly thought they would make good pets</p>
+	        	<p>Abused by owners in order to force them to perform</p>
+	        	<p>Retired from performing acts</p>
+	        	<p>Saved from being slaughtered to make fur coats</p>
+	        	<p>Rescued as babies after hunters killed their mothers</p>
+	        </div>
+	        <br>
+	        
+	        <div>
+	        	<h3>Contact Big Cat Rescue</h3>
+	        	<p>General inquiries: info@bigcatrescue.org or call 813.920.4130<br>
+	        	We are located at 12802 Easy St. Tampa, FL 33625 No visitors other than regular donors.</p>
+	        </div>
+	        <hr>
+	        <br>
+	    </div>
+	{% endblock content %}
+</body>
+</html>

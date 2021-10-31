@@ -1,0 +1,42 @@
+{% extends 'base.html'%}
+{% block title %}Post Archives - Year{% endblock %}
+{% block content %}
+
+	<br>
+	<h1>Post Archives for {{ year|date:"Y"}}</h1>
+	<hr>
+
+	<ul>
+		{% for date in date_list %}
+		<li style = "display: inline;">
+			<b>
+				<a href = "{% url 'blog:post_month_archive' year|date:'Y' date|date:'b' %}" style="text-decoration:none; color:black;">
+					{{ date|date:"F" }}
+				</a>
+			</b>
+		</li>
+		{% endfor %}
+	</ul>
+	
+	<b>
+		&ensp;Post Modify Date&emsp;&emsp;&emsp;Post Title
+	</b>	
+	
+	<div>
+		<ul>
+			{% for post in object_list %}
+			<li>{{ post.modify_dt|date:"Y-m-d" }}
+			&emsp;&emsp;&ensp;
+				<a href = "{{ post.get_absolute_url }}" style="text-decoration:none; color:black;">
+					{{ post.title }}
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
+	</div>
+	
+	<br>
+	<br>
+	<hr>	
+	<br>
+{% endblock %}

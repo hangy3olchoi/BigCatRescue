@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Django Web Programming{% endblock %}</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    
+    {% block extra-style %}{% endblock %}
+</head>
+
+<body style="padding-top:90px">
+
+<!-- logo 이미지를 사용하기 위해서 static load -->
+	{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-light fixed-top">
+<!-- 'home' 메뉴를 없애고 로고가 그 기능을 수행. -->
+    <span class="navbar-brand mx-4">
+    	<a href="{% url 'home' %}">
+    		<image src="{% static 'img/BigCarResque_Logo.png' %}" width="94" height="63">
+    	</a>
+    </span>
+    
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-dark" font-weight="bold" href="{% url 'blog:index' %}"><b>Blog</b></a></li>
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-dark" href="{% url 'photo:index' %}"><b>Photo</b></a></li>
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-dark" href="{% url 'polls:index' %}"><b>Polls</b></a></li>
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-dark" href="" onclick="openPopup()"><b>Q&A</b></a></li>
+                
+                <!-- 팝업창을 띄우는 소스 -->
+                <script>
+                	function openPopup(){
+                		window.open("http://127.0.0.1:8000/chatbot/", "new", "menubar=no , width=490, height=720")
+                	}
+                </script>
+            <li class="nav-item mx-1 btn btn-light">
+                <a class="nav-link text-dark" href="{% url 'bookmark:index' %}"><b>Bookmark</b></a></li>
+
+            <li class="nav-item dropdown mx-1 btn btn-light">
+                <a class="nav-link dropdown-toggle text-dark" href="#" data-toggle="dropdown"><b>Add</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'blog:add' %}">Post</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'photo:album_add' %}">Album</a>
+                    <a class="dropdown-item" href="{% url 'photo:photo_add' %}">Photo</a>
+                    <a class="dropdown-item" href="{% url 'bookmark:add' %}">Bookmark</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown mx-1 btn btn-light">
+                <a class="nav-link dropdown-toggle text-dark" href="#" data-toggle="dropdown"><b>Change</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'blog:change' %}">Post</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'photo:album_change' %}">Album</a>
+                    <a class="dropdown-item" href="{% url 'photo:photo_change' %}">Photo</a>
+                    <a class="dropdown-item" href="{% url 'bookmark:change' %}">Bookmark</a>
+                </div>
+            </li>
+               
+            <li class="nav-item dropdown mx-1 btn btn-light">
+                <a class="nav-link dropdown-toggle text-dark" href="#" data-toggle="dropdown"><b>Util</b></a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="{% url 'admin:index' %}">Admin</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{% url 'blog:post_archive' %}">Archive</a>
+                    <a class="dropdown-item" href="{% url 'blog:search' %}">Search</a>
+                </div>
+            </li>
+        </ul>
+
+        <form action="/crawling/" method="post">
+       		{% csrf_token %}
+       		<input type="text"  name="search_word" value="Crawling!!!">
+       		<input type="submit"  value="Find" class="btn btn-dark btm-sm">
+        </form>
+        <ul class="navbar-nav ml-5 mr-5">
+        	<li class="nav-item dropdown mx-1 btn btn-dark">
+        		{% if user.is_active %}
+        		<a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+        			<i class="fas fa-user"></i>&ensp;{% firstof user.get_short_name user.get_username %}&ensp;
+        		</a>
+        		<div class="dropdown-menu">
+        			<a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+        			<a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a>
+        		</div>
+        		{% else %}
+        		<a class="nav-link dropdown-toggle text-white" href="#" data-toggle="dropdown">
+        			<i class="fas fa-user"></i>&ensp;Anonymous&ensp;
+        		</a>
+        		<div class="dropdown-menu">
+        			<a class="dropdown-item" href="{% url 'login' %}">Login</a>
+        			<a class="dropdown-item" href="{% url 'register' %}">Register</a>
+        		</div>
+        		{% endif %}
+        	</li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+{% block footer %}
+	<footer class="fixed-bottom bg-dark">
+	    <div class="text-white font-italic text-right mr-5">Contact Big Cat Rescue -> info@bigcatrescue.org&nbsp;&nbsp;&nbsp;or&nbsp;&nbsp;&nbsp;call 813.920.4130</div>
+	</footer>
+{% endblock %}
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/c998a172fe.js"></script>
+
+{% block extra-script %}{% endblock %}
+
+</body>
+</html>

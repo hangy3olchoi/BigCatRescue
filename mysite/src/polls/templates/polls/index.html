@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}polls index{% endblock %}
+{% block content %}
+
+<!-- views의 index()의 밸류가 존재한다면 아래에 표기 -->
+<br>
+<h1>Polls</h1>
+<hr>
+
+{% if latest_question_list %}
+	<ol>
+	{% for question in latest_question_list %}
+	<b>
+		<li>
+			<!--  urls의 <int:question_id>/에 해당 -->
+			<a href="/polls/{{question.id}}/" style="text-decoration:none; color:black;">{{question.question_text}}</a>
+		</li>
+		<br>
+	</b>	
+	{% endfor %}
+	</ol>
+
+
+<!-- views의 index()의 밸류가 존재하지 않는다면 아래에 표기 -->
+{% else %}
+	<p> No Polls are available. </p>
+{% endif %}
+
+{% endblock %}

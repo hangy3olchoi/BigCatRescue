@@ -1,0 +1,78 @@
+{% extends 'base.html'%}
+
+{% block title %}Big Cat Rescue - Blog List{% endblock %}
+
+{% block content %}
+
+	<br>
+	<h1>Blog List</h1>
+	<hr>
+	
+	<table class="table table-hover table-sm table-condensed">
+		
+		<thead>
+		
+			<tr class="table bg-dark text-white text-center">
+				<th>No.</th>
+				<th>Post Title</th>
+				<th>Written by</th>
+				<th>Modify Date</th>
+			</tr>
+			
+		</thead>
+		
+		<tbody>
+		
+			{% for post in posts %}
+			
+			<tr>
+				<td class="text-center" style="width:100px">{{ post.id }}</td>
+				<td style="width:600px; text-indent:1em;"><a href='{{ post.get_absolute_url }}' style="text-decoration:none; color:black;">{{ post.title }}</a></td>
+				<td class="text-center " style="width:150px">{{ post.owner }}</td>
+				<td class="text-center " style="width:150px">{{ post.modify_dt|date:"N d, Y" }}</td>
+			</tr>
+			
+			{% endfor %}
+			
+		</tbody>
+		
+	</table>
+		
+	<br>
+	
+	<div class="row">
+		
+		<div class="col-md-6 text-light">
+		
+			{% if page_obj.has_previous %}
+				<a href= "?page= {{ page_obj.previous_page_number }}">
+				<i class="fas fa-arrow-circle-left"></i> Pre</a>			
+			{% endif %}
+			
+		</div>
+
+		<div class="col-md-6 text-right">	
+				
+			{% if page_obj.has_next %}
+				<a href= "?page= {{ page_obj.next_page_number }}">
+				Next <i class="fas fa-arrow-circle-right"></i></a>
+			{% endif %}
+
+		</div>
+		
+	</div>	
+	
+	<div class="text-center">
+	
+		page {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+			
+	</div>
+	
+	<hr>
+	<br>
+	<br>			
+	<br>
+	<br>
+	<br>
+
+{% endblock %}

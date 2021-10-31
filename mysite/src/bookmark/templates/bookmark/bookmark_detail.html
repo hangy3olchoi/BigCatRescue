@@ -1,0 +1,15 @@
+{% extends 'base.html'%}
+{% block title %}Recommendation Detail{% endblock %}
+{% block content %}
+<div id = "content">
+	<h1>Recommendation</h1>
+	<hr>
+	
+	<h5>{{object.title}}</h5>
+	
+	<b>
+		&emsp; - <a href = "{{object.url}}" style="text-decoration:none; color:black;">{{object.url}}</a>
+	</b>
+		
+</div>
+{% endblock %}
